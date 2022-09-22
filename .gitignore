@@ -1,0 +1,48 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# etc
+*Binary*
+*jungol*
+*input*
+*test*
+*소스*
+*개미탈출*
+*축제*
+*Text*
+
+#Visual Studio
+*.vcxproj*
+*.filters*
+*.user*
+*Debug*
