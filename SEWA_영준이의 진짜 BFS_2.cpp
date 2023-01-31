@@ -63,7 +63,6 @@ void maketree(int i, int input) {   // input은 parent_idx
 
 int LCA(int prev, int cur) {
 	int diff = depth[cur] - depth[prev];
-	//printf("%d\n", diff);
 
 	while (diff != 0) {
 		int tmp_cur = cur;
@@ -98,22 +97,6 @@ int main() {
 			maketree(i, input);
 		}
 
-		/*
-		printf("\n\n\nTC: %d\n", test_case);
-		for (int i = 1; i  <= N; i++) {
-		   printf("<i>:%d\n", i);
-		   printf("parent: %d\n", parent[i]);
-		   printf("child: ");
-		   childnode* cur = childlist[i];
-		   while (cur != nullptr) {
-			  printf("%d ", cur->child);
-			  cur = cur->nextptr;
-		   }
-		   puts("");
-		   printf("depth: %d\n\n", depth[i]);
-		}
-		*/
-
 		int bfs_stack[100002];
 		bfs_stack[fin_idx++] = 1;
 		int lca_prev = 1;
@@ -122,16 +105,13 @@ int main() {
 
 		while (idx != fin_idx) {
 			lca_cur = bfs_stack[idx++];
-			// printf("%d ", cur_num);
 			childnode* cur_node = childlist[lca_cur];
 			while (cur_node != nullptr) {
 				bfs_stack[fin_idx++] = cur_node->child;
 				cur_node = cur_node->nextptr;
 			}
 
-			//printf("%d %d\n", lca_prev, lca_cur);
 			int lca_depth = LCA(lca_prev, lca_cur);
-			// printf("%d\n", lca_depth); 
 			res += depth[lca_prev] + depth[lca_cur] - 2 * lca_depth;
 
 			lca_prev = lca_cur;
