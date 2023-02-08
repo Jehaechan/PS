@@ -16,7 +16,7 @@ struct Node {
 int idx;
 Node node[100002];
 int queue[100000];
-int dp[100002][14];		// dp[a][b]   a³ëµåÀÇ 2^(b)¹øÂ° Á¶»ó
+int dp[100002][14];		// dp[a][b]   aë…¸ë“œì˜ 2^(b)ë²ˆì§¸ ì¡°ìƒ
 
 childnode mallocnode[100002];
 int idx2;
@@ -76,8 +76,8 @@ int main() {
 				dp[i][dp_idx] = dp[parent_idx][dp_idx-1];
 				parent_idx = dp[i][dp_idx++];
 			}
-			// ¿©±â¼­ ±¸ÇÏ´Â ¹æ¹ıÀ» Àß ºÁµÎ¾î¾ß ÇÑ´Ù.
-			// 2^n + 2^n = 2^(n+1)°°Àº ´À³¦ÀÌ´Ù.
+			// ì—¬ê¸°ì„œ êµ¬í•˜ëŠ” ë°©ë²•ì„ ì˜ ë´ë‘ì–´ì•¼ í•œë‹¤.
+			// 2^n + 2^n = 2^(n+1)ê°™ì€ ëŠë‚Œì´ë‹¤.
 		}
 
 		/*
@@ -194,6 +194,6 @@ int main() {
 }
 
 /*
-LCA ¾Ë°í¸®Áò
+LCA ì•Œê³ ë¦¬ì¦˜
 https://www.crocus.co.kr/660
 */
