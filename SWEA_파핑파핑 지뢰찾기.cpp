@@ -22,20 +22,20 @@ int main() {
 		scanf("%d", &len);
 		for (int i = 1;i <= len;i++)
 			scanf(" %s", &map1[i][1]);
-		memset(map2, 2, sizeof(char) * 302 * 302);		// °¡ÀåÀÚ¸®´Â ÆøÅºÀ¸·Î Ã¤¿î´Ù
+		memset(map2, 2, sizeof(char) * 302 * 302);		// ê°€ìž¥ìžë¦¬ëŠ” í­íƒ„ìœ¼ë¡œ ì±„ìš´ë‹¤
 
 		for (int i = 1;i <= len;i++) {
 			for (int j = 1;j <= len;j++) {
 				if (map1[i][j] == '*') {
-					continue;		// 2´Â ÆøÅº ÀÚ¸®
+					continue;		// 2ëŠ” í­íƒ„ ìžë¦¬
 				}
 				else {
-					map2[i][j] = 0;	// 0Àº ÁÖº¯¿¡ ÆøÅºÀÌ ¾ø´Â ÀÚ¸®
+					map2[i][j] = 0;	// 0ì€ ì£¼ë³€ì— í­íƒ„ì´ ì—†ëŠ” ìžë¦¬
 					for (int k = 0;k < 8;k++) {
 						int dx = delta[k].x;
 						int dy = delta[k].y;
 						if (map1[i + dx][j + dy] == '*') {
-							map2[i][j] = 1;		// 1Àº ÁÖº¯¿¡ ÆøÅºÀÌ ÀÖ´Â ÀÚ¸®
+							map2[i][j] = 1;		// 1ì€ ì£¼ë³€ì— í­íƒ„ì´ ìžˆëŠ” ìžë¦¬
 							break;
 						}
 					}
@@ -43,7 +43,7 @@ int main() {
 			}
 		}
 
-		int cnt = 0;		// Å¬¸¯ °³¼ö
+		int cnt = 0;		// í´ë¦­ ê°œìˆ˜
 
 		/*
 		for (int i = 1;i <= len;i++) {
@@ -56,7 +56,7 @@ int main() {
 
 		for (int i = 1; i <= len; i++) {
 			for (int j = 1;j <= len;j++) {
-				if (!map2[i][j]) {		// ÆøÅºÀÌ ¾ø´Â ÀÚ¸®¶ó¸é
+				if (!map2[i][j]) {		// í­íƒ„ì´ ì—†ëŠ” ìžë¦¬ë¼ë©´
 					cnt++;
 					xy queue[5000];
 					int front = 0, rear = 0;
