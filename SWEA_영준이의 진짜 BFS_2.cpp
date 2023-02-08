@@ -8,13 +8,13 @@ struct childnode {
 };
 
 int idx, fin_idx;
-int parent[100002];               // ºÎ¸ğ¸¦ ÀúÀåÇØµÎ´Â ¸®½ºÆ®
+int parent[100002];               // ë¶€ëª¨ë¥¼ ì €ì¥í•´ë‘ëŠ” ë¦¬ìŠ¤íŠ¸
 childnode mallocnode[100002];
-childnode* childlist[100002];      // ÀÚ½ÄÀ» ÀúÀåÇØµÎ´Â ¸®½ºÆ®
-childnode* lastptr[100002];         // ¸¶Áö¸· ptr¸¦ ÀúÀåÇØµÎ´Â ¸®½ºÆ®
+childnode* childlist[100002];      // ìì‹ì„ ì €ì¥í•´ë‘ëŠ” ë¦¬ìŠ¤íŠ¸
+childnode* lastptr[100002];         // ë§ˆì§€ë§‰ ptrë¥¼ ì €ì¥í•´ë‘ëŠ” ë¦¬ìŠ¤íŠ¸
 
-int depth[100002];               // depth¸¦ ÀúÀåÇØµÎ´Â ¸®½ºÆ®
-int dp[100002][17];               // dp[a][b]   a³ëµåÀÇ 2^(b)¹øÂ° Á¶»ó
+int depth[100002];               // depthë¥¼ ì €ì¥í•´ë‘ëŠ” ë¦¬ìŠ¤íŠ¸
+int dp[100002][17];               // dp[a][b]   aë…¸ë“œì˜ 2^(b)ë²ˆì§¸ ì¡°ìƒ
 
 void init() {
 	idx = 0;
@@ -36,21 +36,21 @@ int log2(int N) {
 	return ret - 1;
 }
 
-void maketree(int i, int input) {   // inputÀº parent_idx
-	parent[i] = input;         // ºÎ¸ğ³ëµå ÀúÀå
+void maketree(int i, int input) {   // inputì€ parent_idx
+	parent[i] = input;         // ë¶€ëª¨ë…¸ë“œ ì €ì¥
 
 	mallocnode[i].child = i;
 
 	if (lastptr[input] == nullptr) {
 		childlist[input] = &mallocnode[i];
-	}      // ÀÚ½ÄÀÌ ÇÏ³ªµµ ¾ø´Ù¸é Ã³À½À¸·Î ¿¬°á
+	}      // ìì‹ì´ í•˜ë‚˜ë„ ì—†ë‹¤ë©´ ì²˜ìŒìœ¼ë¡œ ì—°ê²°
 	else {
 		lastptr[input]->nextptr = &mallocnode[i];
-	}      // ÀÚ½ÄÀÌ ÀÖ´Ù¸é ¸¶Áö¸·¿¡ ¿¬°á
+	}      // ìì‹ì´ ìˆë‹¤ë©´ ë§ˆì§€ë§‰ì— ì—°ê²°
 
-	lastptr[input] = &mallocnode[i];      // ¸¶Áö¸· node update
+	lastptr[input] = &mallocnode[i];      // ë§ˆì§€ë§‰ node update
 
-	depth[i] = depth[input] + 1;         // depth ÀúÀå
+	depth[i] = depth[input] + 1;         // depth ì €ì¥
 
 	int loop = log2(depth[i]) + 1;
 	int cur_parent = i;
@@ -88,7 +88,7 @@ int main() {
 	scanf("%d", &T);
 	for (test_case = 1; test_case <= T; ++test_case) {
 		init();
-		depth[1] = 0;      // depth´Â 0ºÎÅÍ ½ÃÀÛ
+		depth[1] = 0;      // depthëŠ” 0ë¶€í„° ì‹œì‘
 		int N;
 		scanf("%d", &N);
 		for (int i = 2; i <= N; i++) {
@@ -101,7 +101,7 @@ int main() {
 		bfs_stack[fin_idx++] = 1;
 		int lca_prev = 1;
 		int lca_cur;
-		long long res = 0;			// long long type·Î ÇØÁà¾ß ÇÔÀ» À¯ÀÇ!
+		long long res = 0;			// long long typeë¡œ í•´ì¤˜ì•¼ í•¨ì„ ìœ ì˜!
 
 		while (idx != fin_idx) {
 			lca_cur = bfs_stack[idx++];
