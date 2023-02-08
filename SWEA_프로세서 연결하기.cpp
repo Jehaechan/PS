@@ -7,8 +7,8 @@ struct coord {
 
 coord list[12];
 char map[12][12];
-int max_processor;		// ÇöÀç±îÁö ÄÑÁú ¼ö ÀÖ´Â max ÇÁ·Î¼¼¼­
-int cur_processor;		// Áö±Ý ÄÑÁ®ÀÖ´Â ÇÁ·Î¼¼¼­
+int max_processor;		// í˜„ìž¬ê¹Œì§€ ì¼œì§ˆ ìˆ˜ ìžˆëŠ” max í”„ë¡œì„¸ì„œ
+int cur_processor;		// ì§€ê¸ˆ ì¼œì ¸ìžˆëŠ” í”„ë¡œì„¸ì„œ
 int min_len;
 int cur_len;
 int idx;
@@ -140,7 +140,7 @@ int main(int argc, char** argv)
 
 	for (test_case = 1; test_case <= T; ++test_case)
 	{
-		memset(map, 0, sizeof(char) * 12 * 12);		// map ÃÊ±âÈ­
+		memset(map, 0, sizeof(char) * 12 * 12);		// map ì´ˆê¸°í™”
 
 		cur_processor = 0;
 		max_processor = 0;
@@ -170,5 +170,5 @@ int main(int argc, char** argv)
 		recursive(0);
 		printf("#%d %d\n", test_case, min_len);
 	}
-	return 0;//Á¤»óÁ¾·á½Ã ¹Ýµå½Ã 0À» ¸®ÅÏÇØ¾ßÇÕ´Ï´Ù.
+	return 0;//ì •ìƒì¢…ë£Œì‹œ ë°˜ë“œì‹œ 0ì„ ë¦¬í„´í•´ì•¼í•©ë‹ˆë‹¤.
 }
