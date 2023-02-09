@@ -216,7 +216,6 @@ void dijk3(int start, int mode) {
 	while (!pq.empty()) {
 		int cur_val = -pq.top().first;
 		int cur_idx = pq.top().second;
-		visited[cur_idx] = 1;
 
 		pq.pop();
 
@@ -233,6 +232,7 @@ void dijk3(int start, int mode) {
 				pq.push({ -new_val, i });
 			}
 		}
+		visited[cur_idx] = 1;
 	}
 }
 
