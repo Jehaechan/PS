@@ -1,7 +1,5 @@
 #include <stdio.h>
 #define MAX_N 500
-#define MAX_M 10000
-#define MAX_Q 40000
 #define INT_MAX 387654321
 int choose_dog[MAX_N][MAX_N];
 
@@ -77,7 +75,7 @@ int main() {
 		}
 	}
 
-	for (int i = 0;i < N;i++) {	// °æÀ¯ÇÒ Á¡ Ãß°¡
+	for (int i = 0;i < N;i++) {	// Â°Ã¦Ã€Â¯Ã‡Ã’ ÃÂ¡ ÃƒÃŸÂ°Â¡
 		int sorted_idx = idx[i];
 		int dog_val = dog[idx[i]];
 		for (int j = 0;j < N;j++) {	// Start
