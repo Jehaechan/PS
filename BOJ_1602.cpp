@@ -33,20 +33,6 @@ int main() {
 		graph[fin - 1][start - 1] = cost;
 	}
 
-	/*
-	printf("dog: ");
-	for (int i = 0;i < N;i++)
-		printf("%d ", dog[i]);
-	puts("");
-	printf("<graph>\n");
-	for (int i = 0;i < N;i++) {
-		for (int j = 0;j < N;j++) {
-			if (graph[i][j] != INT_MAX) {
-				printf("%d %d %d\n", i, j, graph[i][j]);
-			}
-		}
-	}
-	*/
 	int idx[MAX_N];
 	for (int i = 0;i < N;i++)
 		idx[i] = i;
@@ -62,13 +48,6 @@ int main() {
 		}
 	}
 
-	/*
-	puts("\n");
-	for (int i = 0;i < N;i++) {
-		printf("%d ", dog[idx[i]]);
-	}
-	puts("\n");
-	*/
 	for (int i = 0;i < N;i++) {
 		int i_dog = dog[i];
 		for (int j = 0;j < N;j++) {
@@ -98,15 +77,6 @@ int main() {
 		}
 	}
 
-	/*
-	printf("\n\n<graph>\n");
-	for (int i = 0;i < N;i++) {
-		for (int j = 0;j < N;j++) {
-			if (graph[i][j] != INT_MAX) {
-				printf("%d %d %d\n", i, j, graph[i][j] + choose_dog[i][j]);
-			}
-		}
-	}*/
 	for (int i = 0;i < Q;i++) {
 		int S, T;
 		scanf("%d %d", &S, &T);
