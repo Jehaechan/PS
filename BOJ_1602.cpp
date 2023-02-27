@@ -54,7 +54,7 @@ int main() {
 		}
 	}
 
-	for (int i = 0;i < N;i++) {	// °æÀ¯ÇÒ Á¡ Ãß°¡
+	for (int i = 0;i < N;i++) {
 		int sorted_idx = idx[i];
 		int dog_val = dog[idx[i]];
 		for (int j = 0;j < N;j++) {	// Start
