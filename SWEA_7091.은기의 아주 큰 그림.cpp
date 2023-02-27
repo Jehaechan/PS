@@ -1,5 +1,6 @@
 #include <stdio.h>
-#define MOD 0x3FFFFFFFFFFFFFF
+#include <string.h>
+#define MOD 0x7FFFFFFFFFFFFF
 #define PRIME_NUM_ROW 157
 #define PRIME_NUM_COL 173
 
@@ -72,9 +73,11 @@ int main() {
 		//printf("target_val: %lld\tcur_val: %lld\n", target_val, cur_val);
 
 		int res = 0;
+		long long left[2000];
+		long long right[2000];
+		memset(left, 0, sizeof(long long) * 2000);
+		memset(right, 0, sizeof(long long) * 2000);
 
-		long long save[2000];
-		
 		for (int i = 0;i <= N - H;i++) {
 			if (i != 0) {
 				for (int j = 0;j < W;j++) {
@@ -98,15 +101,14 @@ int main() {
 
 			for (int j = 0; j <= M - W;j++) {
 				if (j != 0) {
-					if (i == 0 && j == 1) {
+					if (i == 0) {
 						for (int k = 0;k < H;k++) {
-							save[j] += map[k][W] * hashmap[k][W - 1];
-							save[j] &= MOD;
+							left[j] += map[k][0] * hashmap[k][0];
+							left[j] &= MOD;
 						}
 						for (int k = 0;k < H;k++) {
-							save[j] += MOD + 1;
-							save[j] -= map[k][0] * hashmap[k][0];
-							save[j] &= MOD;
+							right[j] += map[k][W] * hashmap[k][W - 1];
+							right[j] &= MOD;
 						}
 					}
 					/*
@@ -124,15 +126,54 @@ int main() {
 					}
 					*/
 					else {
+						left[j] += MOD + 1;
+						left[j] -= map[i - 1][j - 1] * hashmap[0][0];
+						left[j] &= MOD;
+						left[j] *= PRIME_NUM_COL;
+						left[j] += map[i + H - 1][j - 1] * hashmap[H - 1][0];
+						left[j] &= MOD;
 
+						right[j] += MOD + 1;
+						right[j] -= map[i - 1][j + W - 1] * hashmap[0][W - 1];
+						right[j] &= MOD;
+						right[j] *= PRIME_NUM_COL;
+						right[j] += map[i + H - 1][j + W - 1] * hashmap[H - 1][W - 1];
+						right[j] &= MOD;
 					}
+					// check map idx(case1 -> correct cause all 1 / but case2 -> diff val 0/1) ////// maybe hashmap
+					cur_val += MOD + 1;
+					cur_val -= left[j];
+					cur_val &= MOD;
+					cur_val *= PRIME_NUM_ROW;
+					cur_val &= MOD;
+
+					cur_val += right[j];
+					cur_val &= MOD;
 				}
 
-				if (cur_val == target_val)
+				if (cur_val == target_val) {
 					res++;
-				//printf("cur:%lld\ttarget:%lld\n", cur_val, target_val);
+				}
 			}
 		}
 		printf("#%d %d\n", tc, res);
 	}
 }
+/*
+printf("a%lld\n", cur_val);
+cur_val += MOD + 1;
+printf("b%lld %lld\n", cur_val, left[j]);
+cur_val -= left[j];
+printf("c%lld\n", cur_val);
+cur_val &= MOD;
+printf("d%lld\n", cur_val);
+cur_val *= PRIME_NUM_ROW;
+printf("e%lld\n", cur_val);
+cur_val &= MOD;
+printf("f%lld\n", cur_val);
+
+cur_val += right[j];
+printf("g%lld\n", cur_val);
+cur_val &= MOD;
+printf("h%lld\n", cur_val);
+*/
