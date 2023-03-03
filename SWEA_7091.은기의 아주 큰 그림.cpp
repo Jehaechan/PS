@@ -11,7 +11,7 @@ int H, W, N, M;
 long long hashmap[2000][2000];
 
 void init() {
-	hashmap[1999][1999] = PRIME_NUM_ROW;
+	hashmap[1999][1999] = PRIME_NUM_ROW * PRIME_NUM_ROW;
 	for (int i = 1998;i >= 0;i--) {
 		hashmap[1999][i] = hashmap[1999][i + 1] * PRIME_NUM_ROW;
 		hashmap[1999][i] &= MOD;
@@ -23,17 +23,6 @@ void init() {
 			hashmap[i][j] &= MOD;
 		}
 	}
-
-	/*
-	for (int i = 0;i < 5;i++) {
-		printf("%lld ", hashmap[0][i]);
-	}
-	puts("");
-	for (int i = 0;i < 5;i++) {
-		printf("%lld ", (hashmap[1][i] * 173) & MOD);
-	}
-	puts("");
-	*/
 }
 
 long long hashval(int map[][2000]) {
@@ -45,7 +34,7 @@ long long hashval(int map[][2000]) {
 		}
 	}
 	return ret;
-}
+} 
 
 int main() {
 	freopen("input.txt", "r", stdin);
@@ -70,7 +59,6 @@ int main() {
 
 		long long target_val = hashval(pic);
 		long long start_val = hashval(map);
-		//printf("target_val: %lld\tcur_val: %lld\n", target_val, cur_val);
 
 		int res = 0;
 		long long left[2000];
@@ -87,7 +75,6 @@ int main() {
 				}
 				start_val *= PRIME_NUM_COL;
 				start_val &= MOD;
-				//printf("%lld\n", start_val);
 
 				for (int j = 0;j < W;j++) {
 					start_val += map[i + H - 1][j] * hashmap[H - 1][j];
@@ -95,36 +82,19 @@ int main() {
 				}
 			}
 			long long cur_val = start_val;
-			//printf("<1>cur:%lld\ttarget:%lld\n", cur_val, target_val);
-
-			//printf("%lld\n", cur_val);
 
 			for (int j = 0; j <= M - W;j++) {
 				if (j != 0) {
 					if (i == 0) {
 						for (int k = 0;k < H;k++) {
-							left[j] += map[k][0] * hashmap[k][0];
+							left[j] += map[k][j - 1] * hashmap[k][0];
 							left[j] &= MOD;
 						}
 						for (int k = 0;k < H;k++) {
-							right[j] += map[k][W] * hashmap[k][W - 1];
+							right[j] += map[k][j + W - 1] * hashmap[k][W - 1];
 							right[j] &= MOD;
 						}
 					}
-					/*
-					for (int k = i;k < i + H;k++) {
-						cur_val += MOD + 1;
-						cur_val -= map[k][j - 1] * hashmap[k - i][0];
-						cur_val &= MOD;
-					}
-					cur_val *= PRIME_NUM_ROW;
-					cur_val &= MOD;
-
-					for (int k = i;k < i + H;k++) {
-						cur_val += map[k][j + W - 1] * hashmap[k - i][W - 1];
-						cur_val &= MOD;
-					}
-					*/
 					else {
 						left[j] += MOD + 1;
 						left[j] -= map[i - 1][j - 1] * hashmap[0][0];
@@ -140,12 +110,9 @@ int main() {
 						right[j] += map[i + H - 1][j + W - 1] * hashmap[H - 1][W - 1];
 						right[j] &= MOD;
 					}
-					// check map idx(case1 -> correct cause all 1 / but case2 -> diff val 0/1) ////// maybe hashmap
 					cur_val += MOD + 1;
 					cur_val -= left[j];
-					cur_val &= MOD;
 					cur_val *= PRIME_NUM_ROW;
-					cur_val &= MOD;
 
 					cur_val += right[j];
 					cur_val &= MOD;
@@ -159,21 +126,3 @@ int main() {
 		printf("#%d %d\n", tc, res);
 	}
 }
-/*
-printf("a%lld\n", cur_val);
-cur_val += MOD + 1;
-printf("b%lld %lld\n", cur_val, left[j]);
-cur_val -= left[j];
-printf("c%lld\n", cur_val);
-cur_val &= MOD;
-printf("d%lld\n", cur_val);
-cur_val *= PRIME_NUM_ROW;
-printf("e%lld\n", cur_val);
-cur_val &= MOD;
-printf("f%lld\n", cur_val);
-
-cur_val += right[j];
-printf("g%lld\n", cur_val);
-cur_val &= MOD;
-printf("h%lld\n", cur_val);
-*/
